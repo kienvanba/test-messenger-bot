@@ -5,6 +5,10 @@ const
 
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
+app.get('', (req, res) => {
+    res.status(200).send('Welcome to Kien\'s messenger bot test server');
+});
+
 app.post('/webhook', (req, res) => {
     let body = req.body;
 
