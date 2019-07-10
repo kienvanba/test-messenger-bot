@@ -20,12 +20,12 @@ app.post('/webhook', (req, res) => {
             let webhook_event = entry.messaging[0];
             console.log(webhook_event);
 
-            let sender_id = webhook_event.sender.id;
-            showAction('mark_seen');
-            requestUserInfo(sender_id, user => {
-                console.log(user);
-            });
-            sendResponse(sender_id, {text: "hello!"});
+            // let sender_id = webhook_event.sender.id;
+            // showAction('mark_seen');
+            // requestUserInfo(sender_id, user => {
+            //     console.log(user);
+            // });
+            // sendResponse(sender_id, {text: "hello!"});
         });
 
         res.status(200).send('EVENT_RECEIVED');
