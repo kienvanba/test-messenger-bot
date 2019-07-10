@@ -25,7 +25,7 @@ app.post('/webhook', (req, res) => {
 });
 
 app.get('/webhook', (req, res) => {
-    let VERIFY_TOKEN = "THIS_IS_JUST_A_RANDOM_STRING";
+    let VERIFY_TOKEN = "TEST_MESSENGER_BOT";
 
     let mode = req.query['hub.mode'];
     let token = req.query['hub.verify_token'];
