@@ -87,7 +87,7 @@ requestUserInfo = (sender_id, callback) => {
     });
 }
 
-showAction = (action) => {
+showAction = (sender_id, action) => {
     let requestBody = {
         "recipient": {
             "id": sender_id,
