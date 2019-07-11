@@ -41,7 +41,7 @@ app.post('/webhook', (req, res) => {
             // showAction(sender_psid, 'mark_seen');
             // sendResponse(sender_psid, {text: "i'm a hacker"});
             // showAction(sender_psid, 'typing_on');
-            requestUserInfo(sender_psid, user => {
+            requestUserInfo(sender_psid, (user) => {
                 // showAction(sender_psid, 'typing_off');
                 let user_template = {
                     "title": user.name,
@@ -57,8 +57,9 @@ app.post('/webhook', (req, res) => {
                         }
                     }
                 };
+                console.log(user);
                 console.log(user.name);
-                console.log(user_template);
+                console.log(response.attachment.type);
                 console.log(response);
                 sendResponse(sender_psid, response);
             });
@@ -115,6 +116,7 @@ function requestUserInfo(sender_psid, callback) {
         "method": "GET"
     }, (err, res, body) => {
         if (!err) {
+            console.log(`api response:\n${res}`);
             callback(body);
         } else {
             console.log(`request user info fail: ${err}`);
