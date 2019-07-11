@@ -37,34 +37,36 @@ app.post('/webhook', (req, res) => {
             let webhook_event = entry.messaging[0];
             console.log(webhook_event);
 
-            let sender_psid = webhook_event.sender.id;
-            showAction(sender_psid, 'mark_seen');
-            sendResponse(sender_psid, {text: "i'm a hacker"});
-            showAction(sender_psid, 'typing_on');
-            requestUserInfo(sender_psid, (user) => {
-                user = JSON.parse(user);
-                showAction(sender_psid, 'typing_off');
-                let user_template = {
-                    "title": user.name,
-                    "image_url": user['profile_pic'],
-                    "subtitle": 'this account is now hacked',
-                };
-                let response = {
-                    attachment: {
-                        type: 'template',
-                        payload: {
-                            template_type: 'generic',
-                            elements: [user_template]
-                        }
-                    }
-                };
-                console.log(user);
-                console.log(user.name);
-                console.log(response.attachment.type);
-                console.log(response);
-                sendResponse(sender_psid, response);
-            });
-            handleMessage(sender_psid, webhook_event.message);
+            // let sender_psid = webhook_event.sender.id;
+            // showAction(sender_psid, 'mark_seen');
+            // sendResponse(sender_psid, {text: "i'm a hacker"});
+            // showAction(sender_psid, 'typing_on');
+            // requestUserInfo(sender_psid, (user) => {
+            //     user = JSON.parse(user);
+            //     showAction(sender_psid, 'typing_off');
+            //     let user_template = {
+            //         "title": user.name,
+            //         "image_url": user['profile_pic'],
+            //         "subtitle": 'this account is now hacked',
+            //     };
+            //     let response = {
+            //         attachment: {
+            //             type: 'template',
+            //             payload: {
+            //                 template_type: 'generic',
+            //                 elements: [user_template]
+            //             }
+            //         }
+            //     };
+            //     console.log(user);
+            //     console.log(user.name);
+            //     console.log(response.attachment.type);
+            //     console.log(response);
+            //     sendResponse(sender_psid, response);
+            // });
+            // handleMessage(sender_psid, webhook_event.message);
+
+            console.log(webhook_event);
         });
 
         res.status(200).send('EVENT_RECEIVED');
