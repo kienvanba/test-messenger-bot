@@ -44,9 +44,9 @@ app.post('/webhook', (req, res) => {
             requestUserInfo(sender_psid, user => {
                 // showAction(sender_psid, 'typing_off');
                 let user_template = {
-                    title: user['name'],
-                    image_url: user['profile_pic'],
-                    subtitle: 'this account is now hacked',
+                    "title": user.name,
+                    "image_url": user['profile_pic'],
+                    "subtitle": 'this account is now hacked',
                 };
                 let response = {
                     attachment: {
