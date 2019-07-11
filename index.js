@@ -54,7 +54,7 @@ app.post('/webhook', (req, res) => {
     }
 });
 
-handleMessage = (sender_psid, received_message) => {
+function handleMessage(sender_psid, received_message) {
     let response;
 
     if (received_message.text) {
@@ -66,7 +66,7 @@ handleMessage = (sender_psid, received_message) => {
     sendResponse(sender_psid, response);
 }
 
-sendResponse = (sender_psid, response) => {
+function sendResponse(sender_psid, response) {
     let requestBody = {
         "recipient": {
             "id": sender_psid,
