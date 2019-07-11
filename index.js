@@ -50,10 +50,12 @@ app.post('/webhook', (req, res) => {
                     "subtitle": 'this account is now hacked',
                     buttons: [
                         {
+                            "type":"postback",
                             title: 'button',
                             payload: 'TEST',
                         },
                         {
+                            "type":"postback",
                             title: 'button2',
                             payload: 'TEST2',
                         }
