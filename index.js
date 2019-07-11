@@ -116,7 +116,7 @@ function requestUserInfo(sender_psid, callback) {
         "method": "GET"
     }, (err, res, body) => {
         if (!err) {
-            console.log(`api response:\n${res.body}`);
+            console.log(`api response:\n${res.body.id}\n${res.body["id"]}`);
             callback(body);
         } else {
             console.log(`request user info fail: ${err}`);
