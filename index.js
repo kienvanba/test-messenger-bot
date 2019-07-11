@@ -57,7 +57,7 @@ app.post('/webhook', (req, res) => {
                         }
                     }
                 };
-                console.log(user);
+                console.log(user_template);
                 console.log(response);
                 sendResponse(sender_psid, response);
             });
