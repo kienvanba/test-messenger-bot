@@ -21,10 +21,10 @@ app.post('/webhook', (req, res) => {
             console.log(webhook_event);
 
             let sender_id = webhook_event.sender.id;
-            showAction(sender_id, 'mark_seen');
-            requestUserInfo(sender_id, user => {
-                console.log(user);
-            });
+            // showAction(sender_id, 'mark_seen');
+            // requestUserInfo(sender_id, user => {
+            //     console.log(user);
+            // });
             sendResponse(sender_id, {text: "hello!"});
         });
 
