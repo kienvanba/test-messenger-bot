@@ -41,32 +41,29 @@ app.post('/webhook', (req, res) => {
             // showAction(sender_psid, 'mark_seen');
             // sendResponse(sender_psid, {text: "i'm a hacker"});
             // showAction(sender_psid, 'typing_on');
-            requestUserInfo(sender_psid, (user) => {
-                // showAction(sender_psid, 'typing_off');
-                let user_template = {
-                    "title": user.name,
-                    "image_url": user['profile_pic'],
-                    "subtitle": 'this account is now hacked',
-                };
-                let response = {
-                    attachment: {
-                        type: 'template',
-                        payload: {
-                            template_type: 'generic',
-                            elements: [user_template]
-                        }
-                    }
-                };
-                console.log(user);
-                console.log(user.name);
-                console.log(response.attachment.type);
-                console.log(response);
-                sendResponse(sender_psid, response);
-            });
-            // console.log(`received message from ${sender_psid}`);
-            // if (webhook_event.message) {
-            //     handleMessage(sender_psid, webhook_event.message);
-            // }
+            // requestUserInfo(sender_psid, (user) => {
+            //     showAction(sender_psid, 'typing_off');
+            //     let user_template = {
+            //         "title": user.name,
+            //         "image_url": user['profile_pic'],
+            //         "subtitle": 'this account is now hacked',
+            //     };
+            //     let response = {
+            //         attachment: {
+            //             type: 'template',
+            //             payload: {
+            //                 template_type: 'generic',
+            //                 elements: [user_template]
+            //             }
+            //         }
+            //     };
+            //     console.log(user);
+            //     console.log(user.name);
+            //     console.log(response.attachment.type);
+            //     console.log(response);
+            //     sendResponse(sender_psid, response);
+            // });
+            handleMessage(sender_psid, webhook_event.message);
         });
 
         res.status(200).send('EVENT_RECEIVED');
@@ -116,7 +113,6 @@ function requestUserInfo(sender_psid, callback) {
         "method": "GET"
     }, (err, res, body) => {
         if (!err) {
-            console.log(`api response:\n${res.body.id}\n${res.body["id"]}`);
             callback(body);
         } else {
             console.log(`request user info fail: ${err}`);
