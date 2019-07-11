@@ -16,17 +16,21 @@ app.post('/webhook', (req, res) => {
     let body = req.body;
 
     if (body.object === 'page') {
+        let sender_id;
         body.entry.forEach(entry => {
             let webhook_event = entry.messaging[0];
             console.log(webhook_event);
 
-            let sender_id = webhook_event.sender.id;
+            sender_id = webhook_event.sender.id;
             // showAction(sender_id, 'mark_seen');
             // requestUserInfo(sender_id, user => {
             //     console.log(user);
             // });
-            sendResponse(sender_id, {text: "hello!"});
+            console.log(`received message from ${sender_id}`);
         });
+        // if (sender_id) {
+        //     sendResponse(sender_id, {text: "hello!"});
+        // }
 
         res.status(200).send('EVENT_RECEIVED');
     } else {
