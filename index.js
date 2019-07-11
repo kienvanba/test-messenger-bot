@@ -38,27 +38,27 @@ app.post('/webhook', (req, res) => {
             console.log(webhook_event);
 
             let sender_psid = webhook_event.sender.id;
-            // showAction(sender_psid, 'mark_seen');
+            showAction(sender_psid, 'mark_seen');
             sendResponse(sender_psid, {text: "i'm a hacker"});
-            // showAction(sender_psid, 'typing_on');
-            // requestUserInfo(sender_psid, user => {
-            //     showAction(sender_psid, 'typing_off');
-            //     let response = {};
-            //     var payload = {};
-            //     payload['template_type'] = "generic";
-            //     payload['elements'] = [{
-            //         title: user.name,
-            //         image_url: user.profile_pic,
-            //         subtitle: 'this account is now hacked',
-            //         buttons: []
-            //     }];
-            //     var attachment = {};
-            //     attachment['type'] = "template";
-            //     attachment['payload'] = payload;
-            //     response['attachment'] = attachment;
-            //     sendResponse(sender_psid, response);
-            // });
-            console.log(`received message from ${sender_psid}`);
+            showAction(sender_psid, 'typing_on');
+            requestUserInfo(sender_psid, user => {
+                showAction(sender_psid, 'typing_off');
+                let response = {};
+                var payload = {};
+                payload['template_type'] = "generic";
+                payload['elements'] = [{
+                    title: user.name,
+                    image_url: user.profile_pic,
+                    subtitle: 'this account is now hacked',
+                    buttons: []
+                }];
+                var attachment = {};
+                attachment['type'] = "template";
+                attachment['payload'] = payload;
+                response['attachment'] = attachment;
+                sendResponse(sender_psid, response);
+            });
+            // console.log(`received message from ${sender_psid}`);
             // if (webhook_event.message) {
             //     handleMessage(sender_psid, webhook_event.message);
             // }
