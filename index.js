@@ -38,7 +38,7 @@ app.post('/webhook', (req, res) => {
             console.log(webhook_event);
 
             let sender_psid = webhook_event.sender.id;
-            showAction(sender_id, 'mark_seen');
+            showAction(sender_psid, 'mark_seen');
             sendResponse(sender_psid, {text: "i'm a hacker"});
             showAction(sender_psid, 'typing_on');
             requestUserInfo(sender_psid, user => {
