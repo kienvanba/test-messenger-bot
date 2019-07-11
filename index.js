@@ -91,7 +91,7 @@ function sendResponse(sender_psid, response) {
 function requestUserInfo(sender_psid, callback) {
     request({
         "uri": `https://graph.facebook.com/${sender_psid}`,
-        "qs": { "fields": "id, name, first_name, last_name, profile_pic"},
+        "qs": { "fields": "id, name, first_name, last_name, profile_pic", "access_token": PAGE_ACCESS_TOKEN},
         "method": "GET"
     }, (err, res, body) => {
         if (!err) {
