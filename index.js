@@ -12,32 +12,6 @@ app.get('', (req, res) => {
     res.status(200).send('Welcome to Kien\'s messenger bot test server');
 });
 
-app.post('/webhook', (req, res) => {
-    let body = req.body;
-
-    if (body.object === 'page') {
-        let sender_id;
-        body.entry.forEach(entry => {
-            let webhook_event = entry.messaging[0];
-            console.log(webhook_event);
-
-            sender_id = webhook_event.sender.id;
-            // showAction(sender_id, 'mark_seen');
-            // requestUserInfo(sender_id, user => {
-            //     console.log(user);
-            // });
-            console.log(`received message from ${sender_id}`);
-        });
-        // if (sender_id) {
-        //     sendResponse(sender_id, {text: "hello!"});
-        // }
-
-        res.status(200).send('EVENT_RECEIVED');
-    } else {
-        res.sendStatus(404);
-    }
-});
-
 app.get('/webhook', (req, res) => {
     let VERIFY_TOKEN = "TEST_MESSENGER_BOT";
 
@@ -55,10 +29,47 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-sendResponse = (sender_id, response) => {
+app.post('/webhook', (req, res) => {
+    let body = req.body;
+
+    if (body.object === 'page') {
+        body.entry.forEach(entry => {
+            let webhook_event = entry.messaging[0];
+            console.log(webhook_event);
+
+            let sender_psid = webhook_event.sender.id;
+            // showAction(sender_id, 'mark_seen');
+            // requestUserInfo(sender_id, user => {
+            //     console.log(user);
+            // });
+            console.log(`received message from ${sender_psid}`);
+            if (webhook_event.message) {
+                handleMessage(sender_psid, webhook_event.message);
+            }
+        });
+
+        res.status(200).send('EVENT_RECEIVED');
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+handleMessage = (sender_psid, received_message) => {
+    let response;
+
+    if (received_message.text) {
+        response = {
+            text: `you sent "${received_message.text}".\nBOT reply "hello"`,
+        }
+    }
+
+    sendResponse(sender_psid, response);
+}
+
+sendResponse = (sender_psid, response) => {
     let requestBody = {
         "recipient": {
-            "id": sender_id,
+            "id": sender_psid,
         },
         "message": response
     }
@@ -77,9 +88,9 @@ sendResponse = (sender_id, response) => {
     });
 }
 
-requestUserInfo = (sender_id, callback) => {
+requestUserInfo = (sender_psid, callback) => {
     request({
-        "uri": `https://graph.facebook.com/${sender_id}`,
+        "uri": `https://graph.facebook.com/${sender_psid}`,
         "qs": { "fields": "id, name, first_name, last_name, profile_pic"},
         "method": "GET"
     }, (err, res, body) => {
@@ -91,10 +102,10 @@ requestUserInfo = (sender_id, callback) => {
     });
 }
 
-showAction = (sender_id, action) => {
+showAction = (sender_psid, action) => {
     let requestBody = {
         "recipient": {
-            "id": sender_id,
+            "id": sender_psid,
         },
         "sender_action": action
     }
