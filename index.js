@@ -39,9 +39,9 @@ app.post('/webhook', (req, res) => {
 
             let sender_psid = webhook_event.sender.id;
             // showAction(sender_id, 'mark_seen');
-            // requestUserInfo(sender_id, user => {
-            //     console.log(user);
-            // });
+            requestUserInfo(sender_psid, user => {
+                console.log(user);
+            });
             console.log(`received message from ${sender_psid}`);
             if (webhook_event.message) {
                 handleMessage(sender_psid, webhook_event.message);
@@ -88,7 +88,7 @@ function sendResponse(sender_psid, response) {
     });
 }
 
-requestUserInfo = (sender_psid, callback) => {
+function requestUserInfo(sender_psid, callback) {
     request({
         "uri": `https://graph.facebook.com/${sender_psid}`,
         "qs": { "fields": "id, name, first_name, last_name, profile_pic"},
@@ -102,7 +102,7 @@ requestUserInfo = (sender_psid, callback) => {
     });
 }
 
-showAction = (sender_psid, action) => {
+function showAction(sender_psid, action) {
     let requestBody = {
         "recipient": {
             "id": sender_psid,
