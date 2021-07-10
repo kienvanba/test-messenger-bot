@@ -172,12 +172,14 @@ function showAction(sender_psid, action) {
 // TELEGRAM
 const { Telegraf } = require("telegraf");
 const bot = new Telegraf(process.env.TELEGRA_ACCESS_TOKEN);
+console.log("create bot");
 bot.command("buy", (ctx) => ctx.reply("buy buy"));
 bot.command("sell", (ctx) => {
   console.log(ctx);
   ctx.reply(JSON.stringify(ctx));
 });
 bot.launch();
+console.log("bot created");
 
 // Enable graceful stop
 process.once("SIGINT", () => bot.stop("SIGINT"));
