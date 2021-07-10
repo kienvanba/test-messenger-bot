@@ -186,15 +186,19 @@ bot.command(Commands.info, (ctx) => {
     ctx.reply(
       "Thông tin cặp tiền: GBP/USD\n- Tỉ giá tiền tệ của đồng bảng Anh và đô la Mỹ"
     );
+  } else {
+    ctx.reply(
+      "Bot mới được học mỗi GU, còn lại chả biết thông tin gì ?? :D ??"
+    );
   }
 });
 
 bot.command(Commands.buy, (ctx) => {
-  ctx.reply("Thị trường đang nghỉ cuối tuần, T2 rồi hãy `mua`...");
+  ctx.reply("Thị trường đang nghỉ cuối tuần, T2 rồi hãy mua...");
 });
 
 bot.command(Commands.sell, (ctx) => {
-  ctx.reply("Thị trường đang nghỉ cuối tuần, T2 rồi hãy `bán`...");
+  ctx.reply("Thị trường đang nghỉ cuối tuần, T2 rồi hãy bán...");
 });
 bot.launch();
 
