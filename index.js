@@ -176,8 +176,8 @@ console.log("create bot");
 bot.command("buy", (ctx) => ctx.reply("buy buy"));
 bot.command("sell", (ctx) => {
   console.log("receive command");
-  console.log(ctx);
-  ctx.reply(JSON.stringify(ctx));
+  console.log("message: ", ctx.update.message.text);
+  ctx.reply("sell sell");
 });
 bot.launch();
 console.log("bot created");
