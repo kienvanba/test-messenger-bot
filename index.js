@@ -171,7 +171,7 @@ function showAction(sender_psid, action) {
 
 // TELEGRAM
 const { Telegraf } = require("telegraf");
-const bot = new Telegraf(process.env.TELEGRA_ACCESS_TOKEN);
+const bot = new Telegraf(process.env.TELEGRAM_ACCESS_TOKEN);
 console.log("create bot");
 bot.command("buy", (ctx) => ctx.reply("buy buy"));
 bot.command("sell", (ctx) => {
