@@ -172,15 +172,31 @@ function showAction(sender_psid, action) {
 // TELEGRAM
 const { Telegraf } = require("telegraf");
 const bot = new Telegraf(process.env.TELEGRAM_ACCESS_TOKEN);
-console.log("create bot");
-bot.command("buy", (ctx) => ctx.reply("buy buy"));
-bot.command("sell", (ctx) => {
-  console.log("receive command");
-  console.log("message: ", ctx.update.message.text);
-  ctx.reply("sell sell");
+
+const Commands = {
+  sell: "sell",
+  buy: "buy",
+  info: "info",
+};
+
+bot.command(Commands.info, (ctx) => {
+  console.log("receive command", ctx);
+  const text = ctx.update.message.text.replace("/info", "").trim();
+  if (text.toLowerCase() == "gu") {
+    ctx.reply(
+      "Thông tin cặp tiền: GBP/USD\n- Tỉ giá tiền tệ của đồng bảng Anh và đô la Mỹ"
+    );
+  }
+});
+
+bot.command(Commands.buy, (ctx) => {
+  ctx.reply("Thị trường đang nghỉ cuối tuần, T2 rồi hãy `mua`...");
+});
+
+bot.command(Commands.sell, (ctx) => {
+  ctx.reply("Thị trường đang nghỉ cuối tuần, T2 rồi hãy `bán`...");
 });
 bot.launch();
-console.log("bot created");
 
 // Enable graceful stop
 process.once("SIGINT", () => bot.stop("SIGINT"));
